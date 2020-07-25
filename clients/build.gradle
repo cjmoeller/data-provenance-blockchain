@@ -1,0 +1,62 @@
+apply plugin: 'org.springframework.boot'
+
+sourceSets {
+    main {
+        resources {
+            srcDir rootProject.file("config/dev")
+        }
+    }
+}
+
+dependencies {
+    // Corda dependencies.
+    compile "$corda_release_group:corda-rpc:$corda_release_version"
+
+    // CorDapp dependencies.
+    compile project(":contracts")
+    compile project(":workflows")
+
+    compile project(":dummy-dssp").sourceSets.main.output
+
+
+
+    compile("org.springframework.boot:spring-boot-starter-websocket:$spring_boot_version") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+    }
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.66'
+    // https://mvnrepository.com/artifact/tech.tablesaw/tablesaw-core
+    compile group: 'tech.tablesaw', name: 'tablesaw-core', version: '0.38.1'
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.14'
+    // https://mvnrepository.com/artifact/edu.ucar/netcdf
+    compile files('lib/netcdfAll-5.3.2.jar')
+
+
+
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
+    compile "org.apache.logging.log4j:log4j-web:${log4j_version}"
+    compile "org.slf4j:jul-to-slf4j:$slf4j_version"
+}
+
+springBoot {
+    mainClassName = "com.template.webserver.Server"
+}
+
+task runTemplateClient(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.template.Client'
+    args 'localhost:10006', 'user1', 'test'
+}
+
+task runTemplateServer(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.template.webserver.Starter'
+    args '--server.port=10050', '--config.rpc.host=localhost', '--config.rpc.port=10006', '--config.rpc.username=user1', '--config.rpc.password=test'
+}
+
+task runPerformanceTest(type: JavaExec, dependsOn: assemble) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'de.uol.provenancechain.util.PerformanceTest'
+}

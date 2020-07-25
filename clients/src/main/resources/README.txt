@@ -1,0 +1,2 @@
+Place the data here, it has to be in the format provided in the example file: data-1574672992387.csv
+The name of the file can be changed in: clients/src/main/java/de/uol/provenancechain/webserver/Controller.java:108

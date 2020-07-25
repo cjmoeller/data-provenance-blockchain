@@ -1,0 +1,2 @@
+"callsign","mmsi","position","heading","sog","cog","rot","length","width","draught","eta","theme","shiptype","imo","timestamp","destination","id","radarid","referenceid","name","navstatus","bow","stern","port","starboard"
+"null","214518123","(53.6200833333333,8.46894)","174","2.234","111.6","720","-1","-1","-1","1970-01-01 01:00:00+01","AIS","Other","0","2019-12-25 10:06:54+01","","2581941488",NULL,"05010700","","EngagedInFishing",NULL,NULL,NULL,NULL
