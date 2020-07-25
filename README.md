@@ -1,6 +1,6 @@
 # Permissioned Blockchain for Scientific Data Management Implementation
 
-This is the corresponding implementation for the paper "Permissioned Blockchain for Scientific Data Management" by Julius
+This is the corresponding implementation for the paper "Permissioned Blockchain for Scientific Data Management" (not published yet) by Julius
 Möller, Sibylle Fröschle and Axel Hahn.
 
 Note: This is an experimental implementation for demonstrating the proposed concept of the paper. Also please note, that 
